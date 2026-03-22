@@ -33,7 +33,7 @@
    
    /* ---- RESET ---- */
    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-   html { scroll-behavior: smooth; }
+   html { scroll-behavior: smooth; zoom: 1.1; }
    body {
      background: var(--bg);
      color: var(--text);
@@ -389,7 +389,7 @@
    
    .hero-ticker {
      position: relative; z-index: 2;
-     margin-top: 90px;
+     margin-top: 50px;
      border-top: 1px solid var(--border);
      border-bottom: 1px solid var(--border);
      background: var(--surface);
