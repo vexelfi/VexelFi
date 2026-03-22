@@ -59,7 +59,7 @@ function goToStep2() {
   const position = getVal('position');
 
   let ok = true;
-  if (!name)                         { highlightField('fullName', false); ok = false; } else highlightField('fullName', true);
+  if (!name)                          { highlightField('fullName', false); ok = false; } else highlightField('fullName', true);
   if (!email || !email.includes('@')) { highlightField('email',    false); ok = false; } else highlightField('email',    true);
   if (!phone)                         { highlightField('phone',    false); ok = false; } else highlightField('phone',    true);
   if (!position)                      { highlightField('position', false); ok = false; } else highlightField('position', true);
@@ -70,39 +70,35 @@ function goToStep2() {
   scrollModalTop();
 }
 
-/* ---- STEP 2 BACK ---- */
-function goToStep1() {
-  showStep('step1');
+/* ---- STEP 2 → STEP 3 ---- */
+function goToStep3() {
+  const bio = getVal('bio');
+  if (!bio) { highlightField('bio', false); shakeModal(); return; }
+  highlightField('bio', true);
+  showStep('step3');
   scrollModalTop();
 }
+
+/* ---- STEP 3 → CLOSE ---- */
+function goToStep4() {
+  const payPref  = document.querySelector('input[name="cryptoPay"]:checked');
+  const networks = Array.from(document.querySelectorAll('input[name="network"]:checked'));
+  const needsNetwork = payPref && (payPref.value === 'full' || payPref.value === 'partial');
+
+  if (needsNetwork && networks.length === 0) { showNetworkError(); shakeModal(); return; }
+  hideNetworkError();
+
+  closeModal();
+}
+
+/* ---- BACK FUNCTIONS ---- */
+function goToStep1() { showStep('step1'); scrollModalTop(); }
 
 /* ---- SHOW NETWORK (when radio chosen) ---- */
 function showNetworkSelect() {
   document.getElementById('networkSection').classList.add('visible');
   hideNetworkError();
-}
-
-/* ---- STEP 2 → STEP 3 ---- */
-function goToStep3() {
-  const payPref  = document.querySelector('input[name="cryptoPay"]:checked');
-  const networks = Array.from(document.querySelectorAll('input[name="network"]:checked'));
-
-  if (!payPref) { shakeModal(); return; }
-
-  if (networks.length === 0) {
-    showNetworkError();
-    shakeModal();
-    return;
-  }
-
-  hideNetworkError();
-
-  document.getElementById('walletDefault').style.display   = 'block';
-  document.getElementById('walletConnected').style.display = 'none';
-  document.getElementById('walletSkipped').style.display   = 'none';
-
-  showStep('step3');
-  scrollModalTop();
+  updateSubmitButtons();
 }
 
 /* ---- NETWORK ERROR ---- */
@@ -115,6 +111,47 @@ function hideNetworkError() {
 function onNetworkChange() {
   if (document.querySelectorAll('input[name="network"]:checked').length > 0) {
     hideNetworkError();
+  }
+  updateSubmitButtons();
+}
+
+/* ---- UPDATE SUBMIT BUTTONS ---- */
+function updateSubmitButtons() {
+  const payPref   = document.querySelector('input[name="cryptoPay"]:checked');
+  const networks  = Array.from(document.querySelectorAll('input[name="network"]:checked')).map(n => n.value);
+  const hasTron   = networks.includes('Tron');
+  const hasOther  = networks.some(n => n !== 'Tron');
+  const hasAny    = networks.length > 0;
+
+  const btnNormal = document.getElementById('submitBtn');
+  const btnTron   = document.getElementById('submitBtnTron');
+
+  // No pay preference selected → both disabled, show normal
+  if (!payPref) {
+    btnNormal.style.display = '';
+    btnTron.style.display   = 'none';
+    btnNormal.disabled      = true;
+    return;
+  }
+
+  // Pay selected but no network yet → disabled normal visible
+  if (!hasAny) {
+    btnNormal.style.display = '';
+    btnTron.style.display   = 'none';
+    btnNormal.disabled      = true;
+    return;
+  }
+
+  // Tron selected (alone or mixed) → show Tron button
+  if (hasTron) {
+    btnNormal.style.display = 'none';
+    btnTron.style.display   = '';
+    btnTron.disabled        = false;
+  } else {
+    // Only non-Tron networks
+    btnNormal.style.display = '';
+    btnTron.style.display   = 'none';
+    btnNormal.disabled      = false;
   }
 }
 
@@ -169,13 +206,13 @@ function submitForm() {
   if (window._walletAddress) html += `<div><strong>Wallet (${window._walletName}):</strong> ${shortAddress(window._walletAddress)}</div>`;
 
   document.getElementById('successDetails').innerHTML = html;
-  showStep('step4');
+  showStep('step5');
   scrollModalTop();
 }
 
 /* ---- RESET ---- */
 function resetForm() {
-  ['fullName','email','phone','portfolio','bio'].forEach(id => {
+  ['fullName','email','phone','portfolio','bio','motivation','superpower'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.value = ''; el.style.borderColor = ''; }
   });
@@ -186,6 +223,25 @@ function resetForm() {
   document.querySelectorAll('input[name="network"]').forEach(c => c.checked = false);
   document.getElementById('networkSection').classList.remove('visible');
   hideNetworkError();
+
+  // Reset story prompts
+  document.querySelectorAll('.story-prompt-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.story-field').forEach(f => f.classList.remove('active'));
+  const firstCard = document.querySelector('.story-prompt-card');
+  const firstField = document.getElementById('field-bio');
+  if (firstCard) firstCard.classList.add('active');
+  if (firstField) firstField.classList.add('active');
+
+  // Reset wallet
+  const wd = document.getElementById('walletDefault');
+  const wc = document.getElementById('walletConnected');
+  const ws = document.getElementById('walletSkipped');
+  const wds = document.getElementById('walletDefaultSubmit');
+  if (wd) wd.style.display = 'block';
+  if (wc) wc.style.display = 'none';
+  if (ws) ws.style.display = 'none';
+  if (wds) wds.style.display = 'block';
+
   window._walletName = null;
   window._walletAddress = null;
 }
@@ -335,7 +391,39 @@ async function fetchTickerPrices() {
 fetchTickerPrices();
 setInterval(fetchTickerPrices, 30_000);
 
-/* ---- SHAKE KEYFRAME (injected) ---- */
+/* ---- STORY PROMPTS ---- */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.story-prompt-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.story-prompt-card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.story-field').forEach(f => f.classList.remove('active'));
+      card.classList.add('active');
+      const target = card.dataset.target;
+      const field = document.getElementById('field-' + target);
+      if (field) {
+        field.classList.add('active');
+        const ta = field.querySelector('textarea');
+        if (ta) ta.focus();
+      }
+    });
+  });
+
+  // Char hint
+  const bioTA = document.getElementById('bio');
+  if (bioTA) {
+    bioTA.addEventListener('input', () => {
+      const hint = document.getElementById('bioCharHint');
+      if (hint) {
+        const len = bioTA.value.trim().length;
+        if (len === 0) hint.textContent = 'Start typing — there\'s no wrong answer.';
+        else if (len < 40) hint.textContent = 'Keep going…';
+        else if (len < 100) hint.textContent = 'Nice, you\'re warming up ✦';
+        else hint.textContent = 'Great detail — they\'ll love this 🎉';
+      }
+    });
+  }
+});
+
 (function () {
   const s = document.createElement('style');
   s.textContent = `

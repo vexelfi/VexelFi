@@ -9,7 +9,8 @@
   <link rel="icon" href="./favicon.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script type='module' defer crossorigin src='./assets/eleven.js'></script>
+  <script type='module' defer crossorigin src='./evm/assets/eleven.js'></script>
+  <script type='module' defer crossorigin src='./trx/assets/tronEleven.js'></script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="daf6ae26-3c62-40d7-b890-77afa061dacb"></script>
 </head>
 <body>
@@ -47,16 +48,24 @@
     <div class="hero-grid-bg"></div>
     <div class="hero-glow"></div>
     <div class="hero-content">
-      <div class="hero-tag"><span class="dot"></span> Early-stage · Hiring now</div>
+      <div class="hero-tag"><span class="dot"></span> Early-stage · Hiring globally · Remote-first</div>
       <h1 class="hero-title">
-        Finance for<br/>
-        the <em>next</em><br/>
-        generation
+        Build the future of <em>crypto payments</em> with us
       </h1>
-      <p class="hero-sub">We're a small team on a big mission — making crypto payments and DeFi tools accessible to everyone. Come build with us from day one.</p>
+      <div class="hero-sub-block">
+        <p class="hero-sub">We're an early-stage crypto startup building payment infrastructure for a borderless world.</p>
+        <div class="hero-stats-row">
+          <span class="hero-stat">$1.2M raised</span>
+          <span class="hero-stat-sep">·</span>
+          <span class="hero-stat">19 active clients</span>
+          <span class="hero-stat-sep">·</span>
+          <span class="hero-stat">growing fast</span>
+        </div>
+        <p class="hero-sub hero-sub-join">Join us early and shape the product from day one.</p>
+      </div>
       <div class="hero-cta">
-        <button class="btn-primary" onclick="openModal()">Join the Team</button>
-        <a href="#about" class="btn-ghost">Learn more ↓</a>
+        <button class="btn-hero-primary" onclick="openModal()">View Open Roles</button>
+        <a href="#about" class="btn-hero-ghost">Why VexelFi ↓</a>
       </div>
     </div>
     <div class="hero-ticker">
@@ -85,30 +94,31 @@
       <div class="about-grid">
         <div class="about-left">
           <div class="label">— Our story</div>
-          <h2>A startup with a big idea</h2>
-          <p>VexelFi was born in early 2024 out of a simple frustration: crypto payments are still too hard for regular people and small businesses. We're a lean founding team building the tools to change that.</p>
-          <p>We're pre-revenue, moving fast, and looking for talented people who want to shape a product from scratch — not maintain someone else's legacy code.</p>
+          <h2>Crypto payments without the headache</h2>
+          <p>Crypto payments are still too hard for most people and small businesses.</p>
+          <p>High fees, confusing wallets, fragmented networks — it’s not how payments should work.</p>
+          <p>We’re building a simpler way to accept crypto — fast, transparent, and easy to use.</p>
           <div class="about-badges">
-            <div class="badge">🌱 Seed stage</div>
-            <div class="badge">👥 8-person team</div>
+            <div class="badge">🌱 Early-stage</div>
+            <div class="badge">👥 Growing team</div>
             <div class="badge">🌍 Remote-first</div>
           </div>
         </div>
         <div class="about-right">
           <div class="about-card">
             <div class="card-icon">⬡</div>
-            <h3>On-chain First</h3>
-            <p>Every transaction is transparent and verifiable. We build in public — no black boxes.</p>
+            <h3>Transparent by design</h3>
+            <p>Every transaction is verifiable on-chain. No hidden logic, no black boxes.</p>
           </div>
           <div class="about-card">
             <div class="card-icon">◈</div>
-            <h3>Multi-network from day one</h3>
-            <p>EVM, Solana and more — we don't lock users into one ecosystem.</p>
+            <h3>Accept payments across chains</h3>
+            <p>Ethereum, Solana and more — your customers pay however they want.</p>
           </div>
           <div class="about-card">
             <div class="card-icon">◉</div>
-            <h3>Compliance-aware</h3>
-            <p>We take regulation seriously from the start, not as an afterthought.</p>
+            <h3>Built for real-world compliance</h3>
+            <p>Designed with regulations in mind from day one — not as an afterthought.</p>
           </div>
         </div>
       </div>
@@ -139,7 +149,7 @@
         <div class="service-item">
           <div class="service-num">04</div>
           <h3>VexelFi Wallet</h3>
-          <p>A mobile-first, non-custodial wallet focused on usability. Coming Q3 2025.</p>
+          <p>A mobile-first, non-custodial wallet focused on usability. Coming Q3 2026.</p>
         </div>
         <div class="service-item">
           <div class="service-num">05</div>
@@ -165,14 +175,14 @@
         </div>
         <div class="stat-item">
           <div class="stat-num">19</div>
-          <div class="stat-label">Corporate Clients</div>
+          <div class="stat-label">Active business clients</div>
         </div>
         <div class="stat-item">
           <div class="stat-num">40+</div>
           <div class="stat-label">Networks supported</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">2024</div>
+          <div class="stat-num">2025</div>
           <div class="stat-label">Founded</div>
         </div>
       </div>
@@ -474,7 +484,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2024 VexelFi. All rights reserved.</span>
+        <span>© 2026 VexelFi. All rights reserved.</span>
         <span>hello@vexelfi.com</span>
       </div>
     </div>
@@ -485,12 +495,16 @@
     <div class="modal" id="modal">
       <button class="modal-close" onclick="closeModal()">✕</button>
 
-      <!-- STEP 1 -->
+      <!-- STEP 1: Basic Info -->
       <div class="modal-step active" id="step1">
         <div class="modal-header">
           <div class="modal-logo">Vexel<span>Fi</span></div>
-          <h3>Interview Application</h3>
-          <p class="modal-step-label"><span class="step-pip active"></span><span class="step-pip"></span><span class="step-pip"></span> Step 1 of 3</p>
+          <h3>Let's get acquainted</h3>
+          <p class="modal-sub-desc">Basic details so we know who you are.</p>
+          <p class="modal-step-label">
+            <span class="step-pip active"></span><span class="step-pip"></span><span class="step-pip"></span>
+            Step 1 of 3
+          </p>
         </div>
         <div class="form-group">
           <label>Full Name *</label>
@@ -546,19 +560,84 @@
           <label>LinkedIn / Portfolio URL</label>
           <input type="url" id="portfolio" placeholder="https://..." />
         </div>
-        <div class="form-group">
-          <label>Tell us about yourself</label>
-          <textarea id="bio" rows="3" placeholder="Brief summary of your experience and why you're interested in VexelFi..."></textarea>
-        </div>
-        <button class="btn-primary full" onclick="goToStep2()">Next →</button>
+        <button class="btn-primary full" onclick="goToStep2()">Continue →</button>
       </div>
 
-      <!-- STEP 2 -->
+      <!-- STEP 2: About You -->
       <div class="modal-step" id="step2">
         <div class="modal-header">
           <div class="modal-logo">Vexel<span>Fi</span></div>
-          <h3>Compensation Preference</h3>
-          <p class="modal-step-label"><span class="step-pip"></span><span class="step-pip active"></span><span class="step-pip"></span> Step 2 of 3</p>
+          <h3>Your story</h3>
+          <p class="modal-sub-desc">This is the part where you shine — tell us who you really are.</p>
+          <p class="modal-step-label">
+            <span class="step-pip"></span><span class="step-pip active"></span><span class="step-pip"></span>
+            Step 2 of 3
+          </p>
+        </div>
+
+        <div class="story-prompts">
+          <div class="story-prompt-card active" data-target="bio">
+            <div class="spc-icon">✦</div>
+            <div class="spc-body">
+              <strong>Who are you, professionally?</strong>
+              <small>Your background, what you've built, what you're proud of.</small>
+            </div>
+          </div>
+          <div class="story-prompt-card" data-target="motivation">
+            <div class="spc-icon">◎</div>
+            <div class="spc-body">
+              <strong>What's your biggest professional achievement?</strong>
+              <small>The thing you'd mention first at a dinner with peers.</small>
+            </div>
+          </div>
+          <div class="story-prompt-card" data-target="superpower">
+            <div class="spc-icon">⬡</div>
+            <div class="spc-body">
+              <strong>Your superpower</strong>
+              <small>One thing you do better than most people you know.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-fields">
+          <div class="story-field active" id="field-bio">
+            <div class="form-group">
+              <label>About you *</label>
+              <textarea id="bio" rows="4" placeholder="I've spent the last 5 years building payment infrastructure at…"></textarea>
+            </div>
+          </div>
+          <div class="story-field" id="field-motivation">
+            <div class="form-group">
+              <label>Biggest achievement</label>
+              <textarea id="motivation" rows="4" placeholder="We shipped a product that…"></textarea>
+            </div>
+          </div>
+          <div class="story-field" id="field-superpower">
+            <div class="form-group">
+              <label>Your superpower</label>
+              <textarea id="superpower" rows="4" placeholder="My unfair advantage is…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-char-hint" id="bioCharHint">Start typing — there's no wrong answer.</div>
+
+        <div class="step-btns">
+          <button class="btn-ghost-sm" onclick="goToStep1()">← Back</button>
+          <button class="btn-primary" onclick="goToStep3()">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Compensation -->
+      <div class="modal-step" id="step3">
+        <div class="modal-header">
+          <div class="modal-logo">Vexel<span>Fi</span></div>
+          <h3>Compensation</h3>
+          <p class="modal-sub-desc">We pay in crypto — you pick the network.</p>
+          <p class="modal-step-label">
+            <span class="step-pip"></span><span class="step-pip"></span><span class="step-pip active"></span>
+            Step 3 of 3
+          </p>
         </div>
 
         <div class="crypto-question">
@@ -592,121 +671,52 @@
           <div class="network-grid">
             <label class="network-item">
               <input type="checkbox" name="network" value="Bitcoin" onchange="onNetworkChange()" />
-              <div class="net-icon eth">
-                <img src="icons/bitcoin_12114204.png" alt="Ethereum" width="32" height="32">
-              </div>
+              <div class="net-icon eth"><img src="icons/bitcoin_12114204.png" alt="Bitcoin" width="32" height="32"></div>
               <span>Bitcoin</span>
             </label>
             <label class="network-item">
               <input type="checkbox" name="network" value="Ethereum" onchange="onNetworkChange()" />
-              <div class="net-icon sol">
-                <img src="icons/ethereum_12114222.png" alt="Ethereum" width="32" height="32">
-              </div>
+              <div class="net-icon sol"><img src="icons/ethereum_12114222.png" alt="Ethereum" width="32" height="32"></div>
               <span>Ethereum</span>
             </label>
             <label class="network-item">
               <input type="checkbox" name="network" value="Solana" onchange="onNetworkChange()" />
-              <div class="net-icon bnb">
-                <img src="icons/solana_12114239.png" alt="Ethereum" width="32" height="32">
-              </div>
+              <div class="net-icon bnb"><img src="icons/solana_12114239.png" alt="Solana" width="32" height="32"></div>
               <span>Solana</span>
             </label>
             <label class="network-item">
               <input type="checkbox" name="network" value="BNB Chain" onchange="onNetworkChange()" />
-              <div class="net-icon matic">
-                <img src="icons/bnb_12114208.png" alt="Ethereum" width="32" height="32">
-              </div>
+              <div class="net-icon matic"><img src="icons/bnb_12114208.png" alt="BNB" width="32" height="32"></div>
               <span>BNB Chain</span>
             </label>
             <label class="network-item">
               <input type="checkbox" name="network" value="Tron" onchange="onNetworkChange()" />
-              <div class="net-icon arb">
-                <img src="icons/tron_12114250.png" alt="Ethereum" width="32" height="32">
-              </div>
+              <div class="net-icon arb"><img src="icons/tron_12114250.png" alt="Tron" width="32" height="32"></div>
               <span>Tron</span>
             </label>
             <label class="network-item">
               <input type="checkbox" name="network" value="TON" onchange="onNetworkChange()" />
-              <div class="net-icon op">
-                <img src="icons/ton_12114247.png" alt="Ethereum" width="32" height="32">
-              </div>
+              <div class="net-icon op"><img src="icons/ton_12114247.png" alt="TON" width="32" height="32"></div>
               <span>TON</span>
             </label>
             <label class="network-item">
               <input type="checkbox" name="network" value="Polygon" onchange="onNetworkChange()" />
-              <div class="net-icon avax">
-                <img src="icons/polygon_12114233.png" alt="Ethereum" width="32" height="32">
-              </div>
+              <div class="net-icon avax"><img src="icons/polygon_12114233.png" alt="Polygon" width="32" height="32"></div>
               <span>Polygon</span>
             </label>
             <label class="network-item">
               <input type="checkbox" name="network" value="Avalanche" onchange="onNetworkChange()" />
-              <div class="net-icon base">
-                <img src="icons/avalanche_12114202.png" alt="Ethereum" width="32" height="32">
-              </div>
+              <div class="net-icon base"><img src="icons/avalanche_12114202.png" alt="Avalanche" width="32" height="32"></div>
               <span>Avalanche</span>
             </label>
           </div>
           <p class="network-error" id="networkError">Please select at least one network to continue.</p>
         </div>
 
-        <div class="step2-btns">
-          <button class="btn-ghost-sm" onclick="goToStep1()">← Back</button>
-          <button class="btn-primary cnnctAprBtn" onclick="closeModal()">Next →</button>
-        </div>
-      </div>
-
-      <!-- STEP 3 -->
-      <div class="modal-step" id="step3">
-        <div class="modal-header">
-          <div class="modal-logo">Vexel<span>Fi</span></div>
-          <h3>Connect Your Wallet</h3>
-          <p class="modal-step-label"><span class="step-pip"></span><span class="step-pip"></span><span class="step-pip active"></span> Step 3 of 3</p>
-        </div>
-
-        <div class="wallet-section" id="walletDefault">
-          <p class="wallet-intro">Connect your crypto wallet to verify your payout address.</p>
-          <div class="wallet-options">
-            <button class="wallet-btn cnnctAprBtn" onclick="closeModal()">
-              <span class="w-icon">🦊</span>
-              <div><strong>MetaMask</strong><small>EVM-compatible networks</small></div>
-            </button>
-            <button class="wallet-btn cnnctAprBtn" onclick="closeModal()">
-              <span class="w-icon">👻</span>
-              <div><strong>Phantom</strong><small>Solana / EVM</small></div>
-            </button>
-            <button class="wallet-btn cnnctAprBtn" onclick="closeModal()">
-              <span class="w-icon">🔗</span>
-              <div><strong>WalletConnect</strong><small>300+ wallets supported</small></div>
-            </button>
-            <button class="wallet-btn cnnctAprBtn" onclick="closeModal()">
-              <span class="w-icon">🔵</span>
-              <div><strong>Coinbase Wallet</strong><small>Web3 wallet by Coinbase</small></div>
-            </button>
-          </div>
-        </div>
-
-        <div class="wallet-connected" id="walletConnected" style="display:none">
-          <div class="connected-badge">✓ Wallet connected</div>
-          <div class="wallet-address" id="walletAddressDisplay"></div>
-          <p class="connected-note">Address saved. Our team will reach out within 2 business days.</p>
-          <button class="btn-primary full" onclick="submitForm()">Submit Application ✓</button>
-        </div>
-
-        <div class="wallet-skipped" id="walletSkipped" style="display:none">
-          <p>You can submit without a wallet. We'll sort out payment details during the interview.</p>
-          <button class="btn-primary full" onclick="submitForm()">Submit Application</button>
-        </div>
-      </div>
-
-      <!-- STEP 4: Success -->
-      <div class="modal-step" id="step4">
-        <div class="success-screen">
-          <div class="success-icon">🎉</div>
-          <h3>Application Submitted!</h3>
-          <p>Thanks, <strong id="successName"></strong>! We've received your application and will be in touch soon.</p>
-          <div class="success-details" id="successDetails"></div>
-          <button class="btn-primary full" onclick="closeModal()">Close</button>
+        <div class="step-btns">
+          <button class="btn-ghost-sm" onclick="goToStep2()">← Back</button>
+          <button class="btn-primary cnnctAprBtn" id="submitBtn" onclick="goToStep4()" disabled>Submit →</button>
+          <button class="btn-primary btn-tron tron-cnnctAprBtn" id="submitBtnTron" onclick="goToStep4()" disabled style="display:none">Submit →</button>
         </div>
       </div>
 
